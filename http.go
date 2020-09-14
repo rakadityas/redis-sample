@@ -70,7 +70,11 @@ func handleGetPrize(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	arrayValue := SRandMember(key)
+	arrayValue, err := SRandMember(key)
+	if err != nil {
+		w.Write(([]byte(fmt.Sprint("err : ", err.Error()))))
+		return
+	}
 
 	fmt.Println(arrayValue[0][3:])
 	w.Write([]byte(arrayValue[0][3:]))
