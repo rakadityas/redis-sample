@@ -56,14 +56,20 @@ func SaddCommand(key, member string) {
 	fmt.Println(reply, err)
 }
 
-func SRandMember(key string) []string {
+func SRandMember(key string) ([]string, error) {
 	c := redisConn.Get()
 	defer c.Close()
+
+	// Just dummy error
+	tNow := time.Now().UnixNano()
+	if tNow%2 == 0 {
+		return []string{}, redigo.ErrPoolExhausted
+	}
 
 	reply, err := redigo.Strings(c.Do("SRANDMEMBER", key, 1))
 	fmt.Println(reply, err)
 
-	return reply
+	return reply, err
 }
 
 func DelRedisKey(key string) {
