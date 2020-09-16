@@ -2,8 +2,8 @@
 go sample app that connected to redis
 
 # how to run:
-1. Run `go get "github.com/garyburd/redigo/redis"`
-2. Run `make run`
+1. $ make initialize  (first time only, to setup go mod and retrieve vendor)
+2. $ make run
 
 # testing
 ```
